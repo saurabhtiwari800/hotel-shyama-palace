@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { WhatsappService } from "@/utils/WhatsappService";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -17,7 +18,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER;
+  const whatsappUrl = WhatsappService.getBookingUrl("Hello! I am interested in booking a room at The Shyama Palace.");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +56,7 @@ export default function Navbar() {
               className={`block font-display font-bold text-lg leading-none transition-colors duration-300 ${isScrolled ? "text-[var(--text-color)]" : "text-white"
                 }`}
             >
-              The Shyama
+              Hotel Shyama
             </span>
             <span
               className={`block text-xs font-bold tracking-widest uppercase leading-none mt-0.5 transition-colors duration-300 ${isScrolled ? "text-[var(--primary-color)]" : "text-[var(--secondary-color)]"
@@ -91,7 +92,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           {/* WhatsApp CTA */}
           <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hello!%20I%20am%20interested%20in%20booking%20a%20room%20at%20The%20Shyama%20Palace.`}
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp us"

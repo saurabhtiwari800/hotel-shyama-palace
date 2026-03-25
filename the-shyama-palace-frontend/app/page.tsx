@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { WhatsappService } from "@/utils/WhatsappService";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -6,6 +7,9 @@ import Facilities from "@/components/Facilities";
 import RoomCard from "@/components/RoomCard";
 import Button from "@/components/Button";
 import { featuredRooms } from "@/data/rooms";
+
+import hotelImage from "@/public/images/front.jpeg"
+import matajiImage from "@/public/images/maa.png"
 
 export default function HomePage() {
   return (
@@ -52,8 +56,86 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Location / Map Section */}
+        <section id="location" className="section-padding bg-white border-b border-orange-100">
+          <div className="container-custom">
+            <div className="flex flex-col lg:flex-row gap-12 items-center">
+              {/* Text & Info */}
+              <div className="w-full lg:w-1/3 space-y-8">
+                <div>
+                  <div className="divider-ornament justify-start mb-3">
+                    <span className="text-[var(--primary-color)] text-xl">📍</span>
+                  </div>
+                  <span className="badge-primary mb-5 inline-block">Our Location</span>
+                  <h2 className="section-title mb-5">
+                    Find Us in{" "}
+                    <span className="text-gradient">Vindhyachal</span>
+                  </h2>
+                  <p className="text-[var(--text-muted)] leading-relaxed">
+                    We are conveniently located near Atal Chowk, just walking distance from the sacred Vindhyavasini Mata Temple.
+                  </p>
+                </div>
+
+                <div className="bg-[var(--background-color)] p-6 rounded-2xl border border-orange-100 shadow-sm">
+                  <h3 className="font-display font-bold text-lg mb-3 text-[var(--text-color)]">
+                    Hotel Shyama Palace
+                  </h3>
+                  <address className="not-italic text-[var(--text-muted)] text-sm leading-relaxed mb-6 space-y-1">
+                    <p>Near Atal Chowk,</p>
+                    <p>In front of Indian Oil Petrol Pump,</p>
+                    <p>Vindhyachal, Mirzapur,</p>
+                    <p>Uttar Pradesh, India — 231307</p>
+                  </address>
+
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-center gap-3 text-sm text-[var(--text-color)] font-medium">
+                      <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-[var(--primary-color)] shrink-0">
+                        🚶
+                      </div>
+                      500m from Mata Temple
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-[var(--text-color)] font-medium">
+                      <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-[var(--primary-color)] shrink-0">
+                        🚂
+                      </div>
+                      1km from Vindhyachal Station
+                    </div>
+                  </div>
+
+                  <a
+                    href="https://maps.app.goo.gl/xmUZdrtHLTgxSkcF9?g_st=aw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-lg text-sm font-bold bg-[var(--primary-color)] text-white hover:bg-[var(--primary-dark)] transition-all duration-300 hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+                  >
+                    Open in Google Maps
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Map */}
+              <div className="w-full lg:w-2/3 h-[450px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl border-4 border-white relative bg-gray-100">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3575.535322094772!2d82.56931387523778!3d25.14510017760556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398feb295eb96f3d%3A0xee9830b1ace1c056!2sHotel%20Shyama%20International%2C%20Atal%20Chowk%2C%20Near%2C%20in%20front%20of%20AdiShakti%20Car%20Wash%2C%20Vindhyachal%2C%20Mirzapur%2C%20Uttar%20Pradesh%20231307!5e0!3m2!1sen!2sin!4v1758732940371!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 grayscale-[0.2] contrast-[1.05]"
+                  title="Hotel Shyama Palace Location Map"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* About Preview */}
-        <section id="about" className="section-padding bg-white overflow-hidden">
+        <section id="about" className="section-padding bg-[var(--background-color)] overflow-hidden">
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Image Column */}
@@ -61,7 +143,7 @@ export default function HomePage() {
                 {/* Main large image */}
                 <div className="relative h-[460px] rounded-2xl overflow-hidden shadow-xl">
                   <Image
-                    src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80"
+                    src={hotelImage}
                     alt="The Shyama Palace luxury interior"
                     fill
                     className="object-cover"
@@ -72,7 +154,7 @@ export default function HomePage() {
                 {/* Floating small image */}
                 <div className="absolute -bottom-6 -right-4 w-44 h-44 rounded-xl overflow-hidden shadow-2xl border-4 border-white hidden md:block">
                   <Image
-                    src="https://images.unsplash.com/photo-1609766857553-e327c8ef9ca5?w=400&q=85"
+                    src={matajiImage}
                     alt="Vindhyavasini Mata Temple"
                     fill
                     className="object-cover"
@@ -181,7 +263,7 @@ export default function HomePage() {
                 <span className="text-black">View All Rooms</span>
               </Button>
               <a
-                href="https://wa.me/918009212634?text=Hello!%20I%20am%20interested%20in%20booking%20a%20room%20at%20The%20Shyama%20Palace.%20Please%20share%20availability.%20🙏"
+                href={WhatsappService.getBookingUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-8 py-4 rounded-lg text-base font-bold bg-[#25d366] text-white hover:bg-[#1eb858] transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-xl"

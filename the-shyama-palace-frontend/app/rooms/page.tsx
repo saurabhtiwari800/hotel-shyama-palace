@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { WhatsappService } from "@/utils/WhatsappService";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RoomCard from "@/components/RoomCard";
@@ -161,7 +162,7 @@ export default function RoomsPage() {
                     <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                       Book instantly via WhatsApp —{" "}
                       <a
-                        href="https://wa.me/919876543210"
+                        href={WhatsappService.getBookingUrl()}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-[var(--primary-color)] font-semibold hover:underline"

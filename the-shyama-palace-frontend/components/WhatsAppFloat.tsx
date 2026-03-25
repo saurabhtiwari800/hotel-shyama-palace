@@ -1,9 +1,9 @@
 "use client";
 
+import { WhatsappService } from "@/utils/WhatsappService";
+
 export default function WhatsAppFloat() {
-  const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER;
-  const message = "Hello! I am interested in booking a room at The Shyama Palace. Please share availability. 🙏";
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = WhatsappService.getBookingUrl();
 
   return (
     <div className="whatsapp-float">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WhatsappService } from "@/utils/WhatsappService";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -13,7 +14,6 @@ const roomLinks = [
   { label: "Deluxe Room", href: "/rooms" },
   { label: "Family Suite", href: "/rooms" },
   { label: "Premium Suite", href: "/rooms" },
-  { label: "Pilgrimage Room", href: "/rooms" },
 ];
 
 export default function Footer() {
@@ -36,7 +36,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className="block font-display font-bold text-white text-lg leading-none">
-                  The Shyama
+                  Hotel Shyama
                 </span>
                 <span className="block text-[var(--primary-light)] text-xs font-semibold tracking-wider uppercase leading-none mt-0.5">
                   Palace
@@ -66,7 +66,7 @@ export default function Footer() {
               </a>
               {/* WhatsApp */}
               <a
-                href="https://wa.me/919876543210"
+                href={WhatsappService.getBookingUrl()}
                 aria-label="WhatsApp"
                 className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-sm hover:bg-[var(--primary-color)] hover:text-white transition-all duration-200"
               >
@@ -124,11 +124,13 @@ export default function Footer() {
               <div className="flex gap-3 text-sm text-gray-400">
                 <span className="mt-0.5 text-base shrink-0">📍</span>
                 <span>
-                  The Shyama Palace,
+                  Hotel Shyama Palace,
                   <br />
+                  Near Atal Chowk, <br />
+                  In front of Indian Oil Petrol Pump <br />
                   Vindhyachal, Mirzapur,
                   <br />
-                  Uttar Pradesh — 231307
+                  Uttar Pradesh, India — 231307
                 </span>
               </div>
               <div className="flex gap-3 text-sm text-gray-400">
@@ -137,7 +139,7 @@ export default function Footer() {
                   href="tel:+919876543210"
                   className="hover:text-[var(--primary-light)] transition-colors"
                 >
-                  +91 98765 43210
+                  +91 8299034747 <br /> +91 9125436270
                 </a>
               </div>
               <div className="flex gap-3 text-sm text-gray-400">
@@ -146,7 +148,7 @@ export default function Footer() {
                   href="mailto:info@theshyamapalace.com"
                   className="hover:text-[var(--primary-light)] transition-colors"
                 >
-                  info@theshyamapalace.com
+                  official.hotelshyama@gmail.com
                 </a>
               </div>
               <div className="flex gap-3 text-sm text-gray-400">
@@ -162,7 +164,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-custom py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
           <p>
-            © {new Date().getFullYear()} The Shyama Palace. All rights reserved.
+            © {new Date().getFullYear()} Hotel Shyama Palace. All rights reserved.
           </p>
           <p className="flex items-center gap-1.5">
             Made with{" "}

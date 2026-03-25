@@ -17,10 +17,11 @@ const categoryColors: Record<string, string> = {
   Suite: "bg-purple-50 text-purple-700 border-purple-200",
 };
 
+import { WhatsappService } from "@/utils/WhatsappService";
+
 export default function RoomCard({ room, featured = false }: RoomCardProps) {
-  const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER;
   const message = `Hello! I'm interested in booking the *${room.name}*. Please share availability and details. 🙏`;
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = WhatsappService.getBookingUrl(message);
 
   return (
     <>
@@ -69,9 +70,6 @@ export default function RoomCard({ room, featured = false }: RoomCardProps) {
             <h3 className="font-display font-bold text-[var(--text-color)] text-lg leading-tight group-hover:text-[var(--primary-color)] transition-colors duration-200">
               <Link href={`/rooms/${room.slug}`}>{room.name}</Link>
             </h3>
-            <span className="text-xs text-[var(--text-muted)] shrink-0 mt-1 bg-[var(--background-color)] border border-[var(--border-color)] px-2 py-0.5 rounded-full">
-              {room.size}
-            </span>
           </div>
 
           {/* Description */}

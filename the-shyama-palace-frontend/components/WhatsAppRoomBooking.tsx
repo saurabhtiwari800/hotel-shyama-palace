@@ -2,16 +2,15 @@
 
 import type { Room } from "@/data/rooms";
 
+import { WhatsappService } from "@/utils/WhatsappService";
+
 interface WhatsAppRoomBookingProps {
   room: Room;
 }
 
 export default function WhatsAppRoomBooking({ room }: WhatsAppRoomBookingProps) {
-  // Mobile WhatsApp links REQUIRE the country code (91 for India) before the 10-digit number.
-  // Using just 10 digits will fail to open the WhatsApp app on mobile devices.
-  const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER;
   const message = `Hello! I'm interested in booking the *${room.name}*. Please share availability and details. 🙏`;
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = WhatsappService.getBookingUrl(message);
 
   return (
     <div className="bg-white rounded-2xl border border-[var(--border-color)] shadow-sm overflow-hidden sticky top-24">
@@ -40,10 +39,6 @@ export default function WhatsAppRoomBooking({ room }: WhatsAppRoomBookingProps) 
         <div className="flex items-center justify-between text-sm">
           <span className="text-[var(--text-muted)]">👥 Max Guests</span>
           <span className="font-semibold text-[var(--text-color)]">{room.maxGuests} Persons</span>
-        </div>
-        <div className="flex items-center justify-between text-sm">
-          <span className="text-[var(--text-muted)]">📐 Room Size</span>
-          <span className="font-semibold text-[var(--text-color)]">{room.size}</span>
         </div>
         <div className="flex items-center justify-between text-sm">
           <span className="text-[var(--text-muted)]">🏷️ Category</span>

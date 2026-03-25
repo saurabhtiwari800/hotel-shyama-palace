@@ -31,7 +31,7 @@ const facilities: Facility[] = [
   },
   {
     icon: "🍽️",
-    title: "Restaurant",
+    title: "Restaurant -- Opening Soon",
     description:
       "Vegetarian cuisine celebrating authentic flavours of Uttar Pradesh.",
   },
