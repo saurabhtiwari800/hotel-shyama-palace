@@ -101,9 +101,6 @@ export default async function RoomDetailPage({ params }: PageProps) {
               <span className="text-white/70 text-xs bg-black/30 px-3 py-1 rounded-full">
                 👥 Up to {room.maxGuests} Guests
               </span>
-              <span className="text-white/70 text-xs bg-black/30 px-3 py-1 rounded-full">
-                📐 {room.size}
-              </span>
             </div>
 
             <h1 className="font-display text-3xl md:text-5xl font-bold text-white leading-tight mb-2">
@@ -136,7 +133,6 @@ export default async function RoomDetailPage({ params }: PageProps) {
                   {/* Quick details */}
                   <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-[var(--border-color)]">
                     {[
-                      { icon: "📐", label: "Room Size", value: room.size },
                       { icon: "👥", label: "Max Guests", value: `${room.maxGuests} Persons` },
                       { icon: "🏷️", label: "Category", value: room.category },
                     ].map((item) => (
@@ -280,7 +276,6 @@ export default async function RoomDetailPage({ params }: PageProps) {
                             ₹{r.price.toLocaleString("en-IN")}
                             <span className="text-xs text-[var(--text-muted)] font-normal">/night</span>
                           </span>
-                          <span className="text-xs text-[var(--text-muted)]">{r.size}</span>
                         </div>
                       </div>
                     </a>
