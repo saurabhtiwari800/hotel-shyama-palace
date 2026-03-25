@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Metadata } from "next";
 import { WhatsappService } from "@/utils/WhatsappService";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,6 +11,19 @@ import { featuredRooms } from "@/data/rooms";
 
 import hotelImage from "@/public/images/front.jpeg"
 import matajiImage from "@/public/images/maa.png"
+
+export const metadata: Metadata = {
+  title: "Home | The Shyama Palace",
+  description: "Experience divine serenity and modern luxury at The Shyama Palace, the best hotel in Vindhyachal, Mirzapur near Vindhyavasini Mata Dham.",
+  openGraph: {
+    title: "The Shyama Palace | Premium Hotel in Vindhyachal",
+    description: "Experience divine serenity and modern luxury at The Shyama Palace, the best hotel in Vindhyachal, Mirzapur near Vindhyavasini Mata Dham.",
+    url: "https://hotelshamapalace.in",
+  },
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   return (
