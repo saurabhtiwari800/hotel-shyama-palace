@@ -1,5 +1,5 @@
-// app/robots.ts
 import { MetadataRoute } from "next";
+import hotelInfo from "@/utils/HotelInfo";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,13 +9,8 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/api/", "/admin/", "/_next/", "/private/"],
       },
-      {
-        // Block GPTBot and common AI scrapers from indexing your content
-        userAgent: ["GPTBot", "ChatGPT-User", "CCBot", "anthropic-ai"],
-        disallow: "/",
-      },
     ],
-    sitemap: "https://hotelshamapalace.in/sitemap.xml",
-    host: "https://hotelshamapalace.in",
+    sitemap: `${hotelInfo.siteUrl}/sitemap.xml`,
+    host: hotelInfo.siteUrl,
   };
 }

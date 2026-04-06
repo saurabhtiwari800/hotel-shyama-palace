@@ -8,17 +8,20 @@ import Facilities from "@/components/Facilities";
 import RoomCard from "@/components/RoomCard";
 import Button from "@/components/Button";
 import { featuredRooms } from "@/data/rooms";
+import hotelInfo from "@/utils/HotelInfo";
 
 import hotelImage from "@/public/images/front.jpeg"
 import matajiImage from "@/public/images/maa.png"
 
 export const metadata: Metadata = {
-  title: "Home | The Shyama Palace",
-  description: "Experience divine serenity and modern luxury at The Shyama Palace, the best hotel in Vindhyachal, Mirzapur near Vindhyavasini Mata Dham.",
+  title: "Hotel Shyama Palace | Best Hotel in Vindhyachal near Vindhyavasini Dham",
+  description:
+    "Hotel Shyama Palace — the best hotel in Vindhyachal, Mirzapur, just 500m from Vindhyavasini Mata Dham. AC rooms from ₹1,499/night with free WiFi, parking & pure veg restaurant. Book now!",
   openGraph: {
-    title: "The Shyama Palace | Premium Hotel in Vindhyachal",
-    description: "Experience divine serenity and modern luxury at The Shyama Palace, the best hotel in Vindhyachal, Mirzapur near Vindhyavasini Mata Dham.",
-    url: "https://hotelshamapalace.in",
+    title: "Hotel Shyama Palace | Best Hotel in Vindhyachal, Mirzapur",
+    description:
+      "Premium hotel just 500m from Vindhyavasini Mata Dham. AC rooms, free parking, pure veg restaurant. Book from ₹1,499/night.",
+    url: hotelInfo.siteUrl,
   },
   alternates: {
     canonical: "/",

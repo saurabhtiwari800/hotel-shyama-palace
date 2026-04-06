@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { HotelSchema } from "@/components/HotelSchema";
+import hotelInfo from "@/utils/HotelInfo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,56 +18,78 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hotelshamapalace.in"),
+  metadataBase: new URL(hotelInfo.siteUrl),
   title: {
-    default: "The Shyama Palace | Luxury Hotel in Vindhyachal, Mirzapur",
-    template: "%s | The Shyama Palace",
+    default:
+      "Hotel Shyama Palace | Best Hotel in Vindhyachal, Mirzapur near Vindhyavasini Dham",
+    template: "%s | Hotel Shyama Palace Vindhyachal",
   },
   description:
-    "Experience divine serenity and modern luxury at The Shyama Palace, located in Vindhyachal, Mirzapur — just steps away from the sacred Vindhyavasini Mata Dham. Book your room today.",
+    "Hotel Shyama Palace — premium hotel in Vindhyachal, Mirzapur, just 500m from Vindhyavasini Mata Dham. AC rooms from ₹1,499/night with free parking, WiFi, and pure veg restaurant. Book now!",
   keywords: [
-    "hotel vindhyachal",
-    "hotel mirzapur",
-    "shyama palace",
-    "hotel shyama palace",
-    "hotel shama palace",
-    "hotel in vindhyachal",
-    "vindhyavasini mata",
-    "pilgrimage hotel",
-    "luxury hotel uttar pradesh",
-    "best hotel near vindhyachal temple"
+    // Primary brand keywords
+    "Hotel Shyama Palace",
+    "Hotel Shyama Palace Vindhyachal",
+    "Shyama Palace Hotel",
+    "The Shyama Palace",
+    // Location keywords
+    "hotel in Vindhyachal",
+    "hotel in Mirzapur",
+    "hotel near Vindhyavasini Mata Temple",
+    "best hotel in Vindhyachal",
+    "hotel near Vindhyavasini Dham",
+    "Vindhyachal hotel",
+    "Mirzapur hotel",
+    // Service keywords
+    "budget hotel Vindhyachal",
+    "luxury hotel Vindhyachal",
+    "AC hotel Vindhyachal",
+    "hotel with parking Vindhyachal",
+    "family hotel Vindhyachal",
+    // Pilgrimage keywords
+    "pilgrimage hotel Vindhyachal",
+    "hotel for darshan Vindhyavasini",
+    "Navratri hotel Vindhyachal",
+    "temple hotel Vindhyachal",
+    // Hindi transliteration keywords
+    "होटल श्यामा पैलेस",
+    "विन्ध्याचल होटल",
+    "विन्ध्यवासिनी मंदिर के पास होटल",
   ],
+  authors: [{ name: "Hotel Shyama Palace" }],
+  creator: "Hotel Shyama Palace",
+  publisher: "Hotel Shyama Palace",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "The Shyama Palace | Luxury Hotel in Vindhyachal",
+    title: "Hotel Shyama Palace | Best Hotel in Vindhyachal, Mirzapur",
     description:
-      "Divine serenity meets modern luxury near Vindhyavasini Mata Dham.",
-    url: "https://hotelshamapalace.in",
-    siteName: "The Shyama Palace",
+      "Premium hotel just 500m from Vindhyavasini Mata Dham. AC rooms, free parking, pure veg restaurant. Book from ₹1,499/night.",
+    url: hotelInfo.siteUrl,
+    siteName: "Hotel Shyama Palace",
     type: "website",
     locale: "en_IN",
     images: [
       {
-        url: "/images/front.jpeg", // We'll assume a generic OG image or fallback if not added
+        url: "/images/front.jpeg",
         width: 1200,
         height: 630,
-        alt: "Hotel Shyama Palace Vindhyachal",
+        alt: "Hotel Shyama Palace — Premium Hotel in Vindhyachal, Mirzapur",
       },
       {
-        url: "/images/maa.png", // We'll assume a generic OG image or fallback if not added
+        url: "/images/maa.png",
         width: 1200,
         height: 630,
-        alt: "Hotel Shyama Palace Vindhyachal",
+        alt: "Vindhyavasini Mata Temple near Hotel Shyama Palace",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Shyama Palace | Luxury Hotel in Vindhyachal",
-    description: "Divine serenity meets modern luxury near Vindhyavasini Mata Dham.",
-    creator: "@theshyamapalace",
+    title: "Hotel Shyama Palace | Best Hotel in Vindhyachal",
+    description:
+      "Premium hotel just 500m from Vindhyavasini Mata Dham. AC rooms from ₹1,499/night.",
   },
   robots: {
     index: true,
@@ -82,6 +105,14 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.png",
   },
+  // Geo meta tags — critical for local hotel SEO
+  other: {
+    "geo.region": "IN-UP",
+    "geo.placename": "Vindhyachal, Mirzapur",
+    "geo.position": `${hotelInfo.geo.latitude};${hotelInfo.geo.longitude}`,
+    ICBM: `${hotelInfo.geo.latitude}, ${hotelInfo.geo.longitude}`,
+    "application-name": "Hotel Shyama Palace",
+  },
 };
 
 export default function RootLayout({
@@ -91,6 +122,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <meta name="theme-color" content="#e8690a" />
+      </head>
       <body className="antialiased min-h-screen flex flex-col">
         {children}
         <WhatsAppFloat />

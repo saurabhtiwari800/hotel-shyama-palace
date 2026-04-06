@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { WhatsappService } from "@/utils/WhatsappService";
+import hotelInfo from "@/utils/HotelInfo";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -136,19 +137,19 @@ export default function Footer() {
               <div className="flex gap-3 text-sm text-gray-400">
                 <span className="text-base shrink-0">📞</span>
                 <a
-                  href="tel:+919876543210"
+                  href={`tel:${hotelInfo.phone}`}
                   className="hover:text-[var(--primary-light)] transition-colors"
                 >
-                  +91 8299034747 <br /> +91 9125436270
+                  {hotelInfo.phoneDisplay}
                 </a>
               </div>
               <div className="flex gap-3 text-sm text-gray-400">
                 <span className="text-base shrink-0">✉️</span>
                 <a
-                  href="mailto:info@theshyamapalace.com"
+                  href={`mailto:${hotelInfo.email}`}
                   className="hover:text-[var(--primary-light)] transition-colors"
                 >
-                  official.hotelshyama@gmail.com
+                  {hotelInfo.email}
                 </a>
               </div>
               <div className="flex gap-3 text-sm text-gray-400">

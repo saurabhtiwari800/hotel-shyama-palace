@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Script from "next/script";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { rooms } from "@/data/rooms";
 import WhatsAppRoomBooking from "@/components/WhatsAppRoomBooking";
+import hotelInfo from "@/utils/HotelInfo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -19,8 +21,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const room = rooms.find((r) => r.slug === slug);
   if (!room) return { title: "Room Not Found" };
   return {
-    title: `${room.name} | Rooms & Suites`,
-    description: room.description,
+    title: `${room.name} — ₹${room.price.toLocaleString("en-IN")}/night | Hotel Shyama Palace`,
+    description: `Book ${room.name} at Hotel Shyama Palace, Vindhyachal — ${room.description} Starting ₹${room.price.toLocaleString("en-IN")}/night with ${room.amenities.slice(0, 4).join(", ")}. Book now!`,
+    openGraph: {
+      title: `${room.name} at Hotel Shyama Palace — ₹${room.price.toLocaleString("en-IN")}/night`,
+      description: room.description,
+      url: `${hotelInfo.siteUrl}/rooms/${room.slug}`,
+      images: [{ url: room.image, width: 800, height: 600, alt: `${room.name} at Hotel Shyama Palace Vindhyachal` }],
+    },
+    alternates: {
+      canonical: `/rooms/${room.slug}`,
+    },
   };
 }
 
@@ -64,8 +75,43 @@ export default async function RoomDetailPage({ params }: PageProps) {
   const otherRooms = rooms.filter((r) => r.id !== room.id).slice(0, 3);
   const cat = categoryColors[room.category] ?? categoryColors.Standard;
 
+  // Per-room Product structured data for rich search results
+  const roomSchema = {
+    "@context": "https://schema.org",
+    "@type": "HotelRoom",
+    name: room.name,
+    description: room.description,
+    image: room.image,
+    occupancy: {
+      "@type": "QuantitativeValue",
+      maxValue: room.maxGuests,
+    },
+    offers: {
+      "@type": "Offer",
+      price: room.price,
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+      url: `${hotelInfo.siteUrl}/rooms/${room.slug}`,
+    },
+    amenityFeature: room.amenities.map((a) => ({
+      "@type": "LocationFeatureSpecification",
+      name: a,
+      value: true,
+    })),
+    containedInPlace: {
+      "@type": "Hotel",
+      name: hotelInfo.name,
+      url: hotelInfo.siteUrl,
+    },
+  };
+
   return (
     <>
+      <Script
+        id={`room-schema-${room.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(roomSchema) }}
+      />
       <Navbar />
 
       <main>
@@ -202,23 +248,23 @@ export default async function RoomDetailPage({ params }: PageProps) {
                   <h3 className="font-display font-bold text-[var(--text-color)] mb-4">Need Help?</h3>
                   <div className="space-y-3">
                     <a
-                      href="tel:+919876543210"
+                      href={`tel:${hotelInfo.phone}`}
                       className="flex items-center gap-3 p-3 rounded-xl bg-[var(--background-color)] border border-[var(--border-color)] hover:border-[var(--primary-color)] transition-all group"
                     >
                       <span className="text-xl">📞</span>
                       <div>
                         <div className="text-xs text-[var(--text-muted)] font-semibold">Call Us</div>
-                        <div className="text-sm font-bold text-[var(--primary-color)]">+91 98765 43210</div>
+                        <div className="text-sm font-bold text-[var(--primary-color)]">{hotelInfo.phoneDisplay}</div>
                       </div>
                     </a>
                     <a
-                      href="mailto:info@theshyamapalace.com"
+                      href={`mailto:${hotelInfo.email}`}
                       className="flex items-center gap-3 p-3 rounded-xl bg-[var(--background-color)] border border-[var(--border-color)] hover:border-[var(--primary-color)] transition-all"
                     >
                       <span className="text-xl">✉️</span>
                       <div>
                         <div className="text-xs text-[var(--text-muted)] font-semibold">Email Us</div>
-                        <div className="text-sm font-bold text-[var(--text-color)]">info@theshyamapalace.com</div>
+                        <div className="text-sm font-bold text-[var(--text-color)]">{hotelInfo.email}</div>
                       </div>
                     </a>
                   </div>
