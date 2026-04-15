@@ -15,10 +15,10 @@ const hotelInfo = {
   ogImage: "/images/front.jpeg",
 
   // Contact
-  phone: "+91 8009212634",
-  phoneDisplay: "+91 8009 212 634",
+  phone: "+91 9196034747",
+  phoneDisplay: "+91 9196 034 747",
   email: "official.hotelshyamapalace@gmail.com",
-  whatsapp: "+918009212634",
+  whatsapp: "+919196034747",
 
   // Address
   address: {
